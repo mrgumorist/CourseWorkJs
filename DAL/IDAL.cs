@@ -14,5 +14,8 @@ namespace DAL
         bool Login(string email, string pass);
         bool Register(string login, string password, string email);
         double GetCourse(string shortname);
+        void AddTransaction(string FromName, string ToName, string from, string to);
+        List<User> GetAllUsers();
+        List<Transaction> GetAllTransactions();
     }
 }

@@ -57,5 +57,18 @@ namespace DAL
             }
             return 0.00;
         }
+        public void AddTransaction(string fromName, string toName, string from, string to)
+        {
+            _ctx.Transactions.Add(new Transaction() { FromName = fromName, ToName = toName, CountFrom = from, CountTo = to });
+            _ctx.SaveChanges();
+        }
+        public List<User> GetAllUsers()
+        {
+            return _ctx.Users.ToList();
+        }
+        public List<Transaction> GetAllTransactions()
+        {
+            return _ctx.Transactions.ToList();
+        }
     }
 }

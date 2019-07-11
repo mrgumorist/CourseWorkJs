@@ -35,11 +35,28 @@ namespace CourseWorkJs.Controllers
             bool l = ctx.Login(email, password);
             return Content(JsonConvert.SerializeObject(l), "application/json");
         }
-        [HttpGet]
+        [HttpPost]
         public ContentResult GetCourse(string shortname)
         {
-
+            double lol = ctx.GetCourse(shortname);
+            return Content(JsonConvert.SerializeObject(lol), "application/json");
         }
-
+        [HttpPost]
+        public ContentResult AddTransaction(string FromName, string ToName, string from, string to)
+        {
+            ctx.AddTransaction(FromName, ToName, from, to);
+            return Content(JsonConvert.SerializeObject("OK"), "application/json");
+        }
+        [HttpGet]
+        public ContentResult GetAllUsers()
+        {
+            var list = ctx.GetAllUsers();
+            return Content(JsonConvert.SerializeObject(list), "application/json");
+        }
+        public ContentResult GetAllTransactions()
+        {
+            var list = ctx.GetAllTransactions();
+            return Content(JsonConvert.SerializeObject(list), "application/json");
+        }
     }
 }

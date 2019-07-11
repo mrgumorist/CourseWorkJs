@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201907101922561_fwehw11.Designer.cs">
       <DependentUpon>201907101922561_fwehw11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907111025567_fwehw1w.cs" />
+    <Compile Include="Migrations\201907111025567_fwehw1w.Designer.cs">
+      <DependentUpon>201907111025567_fwehw1w.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907101922561_fwehw11.resx">
       <DependentUpon>201907101922561_fwehw11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907111025567_fwehw1w.resx">
+      <DependentUpon>201907111025567_fwehw1w.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

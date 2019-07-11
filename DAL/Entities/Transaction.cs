@@ -16,9 +16,9 @@ namespace DAL.Entities
         [Required]
         public string ToName { get; set; }
         [Required]
-        public double CountFrom { get; set; }
+        public string CountFrom { get; set; }
         [Required]
-        public double CountTo { get; set; }
+        public string CountTo { get; set; }
 
     }
 }
