@@ -1,0 +1,380 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styleall.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <title>Start Page</title>
+
+</head>
+
+<body>
+     <script>
+        $(function () {
+            $.ajax({
+                url: 'http://localhost:53230/Misha/GetLast5Transactions',
+                type: "GET",
+                contentType: "application/json",
+                crossDomain: true,
+                success: function (output) {
+                    let str="";
+                    for (i = 0; i < output.length; i++) {
+                        str +=` <tr>
+      <th scope="row">${output[i].Id}</th>
+      <td>${output[i].FromName}</td>
+      <td>${output[i].ToName}</td>
+      <td>${output[i].CountFrom}</td>
+ <td>${output[i].CountTo}</td>
+    </tr>`
+                        
+                    }
+                    $(".bodyoftable").append(str);
+                    },
+                error: function (output) {
+                    alert("alarm!!!");
+                }
+            });
+         });
+         function FirstClick() {
+             let short1 = "";
+             let count = +($('#Iputttt').val());
+             if ($('.kek1').is(':checked')) {
+                 short1 = "MCN";
+             }
+             else if ($('.kek2').is(':checked')) {
+                 short1 = "ACN";
+
+             } else if ($('.kek3').is(':checked')) {
+                 short1 = "DCN";
+             }
+             else {
+                 short1 = "USD";
+             }
+             let short2 = "";
+             if ($('.kek5').is(':checked')) {
+                 short2 = "MCN";
+             }
+             else if ($('.kek6').is(':checked')) {
+                 short2 = "ACN";
+
+             } else if ($('.kek7').is(':checked')) {
+                 short2 = "DCN";
+
+             } else {
+                 short2 = "USD";
+             }
+             if (short2 == short1) {
+                 $("#outpitt").val(`${count}`);
+             }
+             else {
+                 var resp = [];
+                 var price1;
+                 var price2;
+                 let object = {};
+                 object.shortname = short1;
+                     $.ajax({
+                         url: 'http://localhost:53230/Misha/GetCourse',
+                         type: "POST",
+                         data: JSON.stringify(object),
+                         contentType: "application/json",
+                         crossDomain: true,
+                         async: false,
+                         success: function (output) {
+                             resp.push(output);
+                             price1 = +output;
+                             
+                         },
+                         error: function (output) {
+                             alert("alarm!!!");
+                         }
+                 });
+                 object.shortname = short2;
+                 $.ajax({
+                     url: 'http://localhost:53230/Misha/GetCourse',
+                     type: "POST",
+                     data: JSON.stringify(object),
+                     contentType: "application/json",
+                     crossDomain: true,
+                     async: false,
+                     success: function (output) {
+                         
+                         price2 = +output;
+
+                     },
+                     error: function (output) {
+                         alert("alarm!!!");
+                     }
+                 });
+                 count = (price1 / price2) * count;
+                 $("#outpitt").val(`${count}`);
+                
+             }
+         }
+         function SecondClick() {
+             $("#outpitt").val("");
+             $("#Iputttt").val("");
+         }
+    </script>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">AMiChanger</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse show" id="navbarColor01" style="">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exchange.html">Exchange</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html">News</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About us</a>
+                    </li>
+                </ul>
+                <div class="form-inline my-2 my-lg-0">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="register.html">Register</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+    <hr>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-3 text-center">
+                Crypto Exchanger
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-3 text-center">
+                            Pay
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-3 text-center">
+                            Get
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <input class="form-control" type="text" id="Iputttt" placeholder="Default input">
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="col">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <input class="form-control" type="text" placeholder="You can get" id="outpitt" readonly>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek1" name="bit_gateway_send"
+                               checked="checked" readonly="" value="7">
+
+                        <img src="https://cryptochange.am/upload/crypto/Bitcoin_BTC_7.png" title="Bitcoin" alt="Bitcoin">
+                        <span class="option">MCN MishaCoin</span>
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek2" name="bit_gateway_send"
+                               readonly="" value="8">
+
+                        <img src="https://cryptochange.am/upload/crypto/EthereumETH_8.png" title="Ethereum" alt="Ethereum">
+                        <span class="option">ACN AndrewCoin</span>
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek3" name="bit_gateway_send"
+                               readonly="" value="8">
+
+                        <img src="https://cryptochange.am/upload/crypto/Blockchain_6.png" title="Ethereum" alt="Ethereum">
+                        <span class="option">DCN DimaCoin</span>
+                    </label>
+
+                    <br>
+                    <input type="radio" id="bit_gateway_send" class="bit_gateway_receive kek4" name="bit_gateway_send" value="15">
+
+                    <img src="https://cryptochange.am/upload/crypto/Balance-USD_15.png" title="Cash" alt="Cash"> <span class="option">USD Cash </span><span class="right payment-select-reserv"></span>
+                    </label>
+
+                    <hr>
+                </form>
+            </div>
+            <div class="col">
+                <form id="n1">
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek5" name="bit_gateway_send"
+                               checked="checked" readonly="" value="7">
+
+                        <img src="https://cryptochange.am/upload/crypto/Bitcoin_BTC_7.png" title="Bitcoin" alt="Bitcoin">
+                        <span class="option">MCN MishaCoin</span>
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek6" name="bit_gateway_send"
+                               readonly="" value="8">
+
+                        <img src="https://cryptochange.am/upload/crypto/EthereumETH_8.png" title="Ethereum" alt="Ethereum">
+                        <span class="option">ACN AndrewCoin</span>
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek7" name="bit_gateway_send"
+                               readonly="" value="8">
+
+                        <img src="https://cryptochange.am/upload/crypto/Blockchain_6.png" title="Ethereum" alt="Ethereum">
+                        <span class="option">DCN DimaCoin</span>
+                    </label>
+                    <br>
+                    <label>
+                        <input type="radio" id="bit_gateway_send" class="bit_gateway_send kek8" name="bit_gateway_send"
+                               value="15">
+
+                        <img src="https://cryptochange.am/upload/crypto/Balance-USD_15.png" title="Cash" alt="Cash"> <span class="option">USD Cash</span><span class="right payment-select-reserv"></span>
+                    </label>
+
+                    <hr>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-success btn-block" onclick="FirstClick()">Quantify</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-success btn-block" onclick="SecondClick()">Clear</button>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-3 text-center">
+                <h8>Last Exchanges</h8>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row justify-content-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Pay</th>
+                        <th scope="col">Get</th>
+                    </tr>
+                </thead>
+                <tbody class="bodyoftable">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+
+    <footer class="page-footer font-small cyan darken-3">
+
+        <!-- Footer Elements -->
+        <div class="container">
+
+            <!-- Grid row-->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-12 py-5">
+                    <div class="mb-5 flex-center">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!-- Google +-->
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Pinterest-->
+                        <a class="pin-ic">
+                            <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+        <!-- Footer Elements -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:
+            <a href="https://AMiChanger.com"> AMiChanger.com</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</html>

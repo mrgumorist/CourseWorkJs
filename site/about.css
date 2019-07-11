@@ -1,0 +1,31 @@
+.mbr-text {
+    font-style: normal;
+    line-height: 1.6;
+    font-size: 160%
+}
+.align-center {
+    text-align: center;
+}
+.pb-3 {
+    padding-bottom: 1rem!important;
+}
+
+.mbr-section-btn {
+    margin-left: -.25rem;
+    margin-right: -.25rem;
+    font-size: 0;
+}
+.align-center {
+    text-align: center;
+}
+
+.hr-new1{    
+    border: 50px solid lightblue;
+}
+
+.containers-margin{
+    margin: 2% 5% 0% 20%
+}
+.textStyle{
+    margin: 0% 20% 0% 20%;
+}
