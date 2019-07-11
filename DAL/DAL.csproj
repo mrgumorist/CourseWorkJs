@@ -49,13 +49,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EDAL.cs" />
+    <Compile Include="Entities\Coin.cs" />
     <Compile Include="Entities\Contextt.cs" />
+    <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="GetMishaCoin.cs" />
     <Compile Include="IDAL.cs" />
     <Compile Include="Migrations\201907101326191_fwehw.cs" />
     <Compile Include="Migrations\201907101326191_fwehw.Designer.cs">
       <DependentUpon>201907101326191_fwehw.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907101344241_fwehw1.cs" />
+    <Compile Include="Migrations\201907101344241_fwehw1.Designer.cs">
+      <DependentUpon>201907101344241_fwehw1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907101922561_fwehw11.cs" />
+    <Compile Include="Migrations\201907101922561_fwehw11.Designer.cs">
+      <DependentUpon>201907101922561_fwehw11.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +86,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201907101326191_fwehw.resx">
       <DependentUpon>201907101326191_fwehw.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907101344241_fwehw1.resx">
+      <DependentUpon>201907101344241_fwehw1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907101922561_fwehw11.resx">
+      <DependentUpon>201907101922561_fwehw11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
